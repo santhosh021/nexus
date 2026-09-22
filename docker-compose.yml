@@ -1,0 +1,35 @@
+# No database, no auth: this only proxies public data, so it is stateless.
+services:
+  api:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "4500"
+      TRUST_PROXY: "1"
+      # All three are optional. Panels work keyless at lower rate limits when left blank.
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      STACK_APPS_KEY: ${STACK_APPS_KEY:-}
+      NVD_API_KEY: ${NVD_API_KEY:-}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:4500/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  web:
+    build: ./client
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      default:
+      edge:
+        aliases:
+          - nexus-web
+
+networks:
+  edge:
+    external: true

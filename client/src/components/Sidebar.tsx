@@ -63,9 +63,27 @@ export function Sidebar() {
         </button>
       </div>
       {open && (
-        <div id="mobile-nav" className="border-b border-white/10 bg-black/50 px-4 py-3 backdrop-blur-md md:hidden">
-          <Links onNavigate={() => setOpen(false)} />
-        </div>
+        <>
+          {/* Click-outside-to-close backdrop, and it stops the dropdown from sitting behind page content. */}
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+            className="fixed inset-x-0 bottom-0 z-30 bg-black/50 md:hidden"
+            style={{ top: "var(--nexus-topbar-h, 0px)" }}
+          />
+          {/*
+            Fixed to the viewport (not the document), positioned right below the sticky top bar,
+            so it always opens on screen no matter how far down the page you've scrolled.
+          */}
+          <div
+            id="mobile-nav"
+            className="fixed inset-x-0 z-[35] max-h-[70vh] overflow-y-auto border-b border-white/10 bg-[#0b0e14]/95 px-4 py-3 backdrop-blur-md md:hidden"
+            style={{ top: "var(--nexus-topbar-h, 0px)" }}
+          >
+            <Links onNavigate={() => setOpen(false)} />
+          </div>
+        </>
       )}
     </>
   );

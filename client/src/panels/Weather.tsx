@@ -85,7 +85,8 @@ export function Weather() {
         <ErrorBox theme={theme} message={error} source="Open-Meteo" />
       ) : data ? (
         <div className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2">
+          {/* [&>*]:min-w-0 stops the "Next 24 hours" scroller from forcing this grid column wider than the viewport. */}
+          <div className="grid gap-4 sm:grid-cols-2 [&>*]:min-w-0">
             <Card theme={theme} className="flex flex-col items-center justify-center py-10 text-center">
               <p className="font-display text-7xl" style={{ color: theme.primary }}>{Math.round(data.current.temperature_2m)}°</p>
               <p className="mt-2 text-lg">{describe(data.current.weather_code)}</p>

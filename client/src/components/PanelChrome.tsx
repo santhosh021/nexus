@@ -10,7 +10,8 @@ export function PanelHeader({ panel, right }: { panel: PanelDef; right?: ReactNo
   const Icon = panel.icon;
   return (
     <header
-      className="sticky z-20 -mx-6 mb-6 flex flex-wrap items-start justify-between gap-4 border-b px-6 pt-6 pb-5 md:-mx-10 md:px-10 md:pt-8"
+      // Sticky only from md up: on phones the header would otherwise eat too much of the small viewport.
+      className="-mx-6 mb-6 flex flex-wrap items-start justify-between gap-4 border-b px-6 pt-6 pb-5 md:sticky md:z-20 md:-mx-10 md:px-10 md:pt-8"
       style={{ top: "var(--nexus-topbar-h, 0px)", background: panel.theme.surface, borderColor: panel.theme.border }}
     >
       <div className="flex items-center gap-4">

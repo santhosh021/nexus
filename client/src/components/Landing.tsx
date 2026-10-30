@@ -7,7 +7,7 @@ export function Landing() {
       <p className="font-display text-sm tracking-[0.3em] text-slate-400 uppercase">Nexus</p>
       <h1 className="mt-2 font-display text-4xl text-white md:text-5xl">Where public data lives.</h1>
       <p className="mt-4 max-w-2xl text-lg text-slate-400">
-        Ten free public APIs, each with its own view built to fit its data. Pick one below — the whole page changes with it.
+        9 free public APIs, each with its own view built to fit its data. Pick one below and the whole page changes with it.
       </p>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
